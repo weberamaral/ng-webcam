@@ -13,10 +13,26 @@
     <link rel="stylesheet" href="/style.css">
 
 </head>
-<body>
+<body ng-app="webcam">
 
-<main class="app">
+<main class="app" ng-controller="webcamController as vm">
+    <ng-webcam on-capturing="vm.onCapturing(src)"
+               on-complete="vm.onComplete(src)"
+               on-error="vm.onError(err)"
+               on-load="vm.onLoad()"
+               config="vm.config"></ng-webcam>
+
+    <button type="button" ng-class="vm.capture()">Capturar</button>
+    <button type="button" ng-class="vm.off()">Desligar camera</button>
+    <button type="button" ng-class="vm.on()">Ligar camera</button>
 </main>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/webcamjs/webcam.min.js"></script>
+<script src="../src/ng-webcam.js"></script>
+
+<script src="angular/app.js"></script>
+<script src="angular/controller.js"></script>
 
 </body>
 </html>
