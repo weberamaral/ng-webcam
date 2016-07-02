@@ -51,7 +51,7 @@ ng-webcam comes with lots of options to simplify tour development:
 * `on-complete` _function_ Callback function for complete action
 * `on-load` _function_ Callback function for load action
 * `config` _object_ Config options for init params in WebcamJS e directive
-** opts
+    - `viewerwidth` _number_ Width for wiewer container camera
 
 ### Working example
 
