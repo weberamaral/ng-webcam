@@ -50,8 +50,16 @@ ng-webcam comes with lots of options to simplify tour development:
 * `on-error` _function_ Callback function for error
 * `on-complete` _function_ Callback function for complete action
 * `on-load` _function_ Callback function for load action
-* `config` _object_ Config options for init params in WebcamJS e directive
-    - `viewerwidth` _number_ Width for wiewer container camera
+* `on-capturing` _function_ Callback function for each capturing image with progress
+* `config` _object_ Config options for init params in WebcamJS e directive | _optional
+    - `viewerWidth` _number_ Width of live camera viewer in pixels| _default to actual size of the DOM element `auto`
+    - `viewerHeight` _number_ Height of live camera viewer in pixels| _default to actual size of the DOM element `auto`
+    - `outputWidth` _number_ Width of captured snapshot image in pixels | _default 320
+    - `outputHeight` _number_ Height of captured snapshot image in pixels | _default 240
+    - `delay` _number_ Number of seconds to wait and display before getting snapshot | _default 0
+    - `shots` _number_ Number of shots captured images | _default 1
+    - `shutterUrl` _string_ Shutter sound's url to play when taking snapshot | _optional
+    - `flahFallbackUrl` _string_ Url of the Adobe Flash player to enable the fallback and crossbrowser modes, _default based on `navigator.getUserMedia`
 
 ### Working example
 
