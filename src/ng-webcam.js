@@ -3,7 +3,7 @@
   /**
    *
    */
-  angular.module('ng-webcam', ['webcam-models']).directive('ngWebcam', ngWebcam);
+  angular.module('ng-webcam', []).directive('ngWebcam', ngWebcam);
   ngWebcam.$inject = [];
   /**
    *
@@ -45,14 +45,13 @@
       });
     }
     // Controller dependencies
-    ngWebcamController.$inject = ['$scope', '$log', '$interval', 'CameraConfig'];
+    ngWebcamController.$inject = ['$scope', '$interval'];
     /**
      *
      * @param $scope
-     * @param $log
      * @param $interval
      */
-    function ngWebcamController($scope, $log, $interval, CameraConfig) {
+    function ngWebcamController($scope, $interval) {
       /*jshint validthis: true */
       var vm = this;
       var sound, timer;
@@ -79,7 +78,13 @@
        *
        */
       function init() {
-        $log.debug('ngWebcamController.init()');
+        vm.config = vm.config || {};
+        if(angular.isUndefined(vm.config.viewerWidth)) vm.config.viewerWidth = 'auto';
+        if(angular.isUndefined(vm.config.viewerHeight)) vm.config.viewerHeight = 'auto';
+        if(angular.isUndefined(vm.config.outputWidth)) vm.config.outputWidth = 320;
+        if(angular.isUndefined(vm.config.outputHeight)) vm.config.outputHeight = 240;
+        if(angular.isUndefined(vm.config.delay)) vm.config.delay = 0;
+        if(angular.isUndefined(vm.config.shots)) vm.config.shots = 1;
         configure();
         configureListeners();
       }
@@ -88,7 +93,6 @@
        *
        */
       function destroy() {
-        $log.debug('ngWebcamController.destroy()');
         Webcam.reset();
         vm.webcamLive = false;
         vm.webcamLoaded = false;
@@ -97,10 +101,6 @@
        *
        */
       function configure() {
-        $log.debug('ngWebcamController.configure()');
-        if(angular.isUndefined(vm.config)) {
-          vm.config = new CameraConfig();
-        }
         if(angular.isDefined(vm.config.shutterUrl)) {
           sound = new Audio();
           sound.autoplay = false;
@@ -125,7 +125,6 @@
        *
        */
       function configureListeners() {
-        $log.debug('ngWebcamController.configureListeners()');
         Webcam.on('load', function() {
           $scope.$apply(function() {
             vm.webcamLoaded = true;
@@ -175,36 +174,27 @@
       }
       /**
        *
-       * @param event
        */
-      function onWebcamCapture(event) {
-        $log.debug('ngWebcamController.onWebcamCapture(event) : ', event);
+      function onWebcamCapture() {
         var count = 0;
         timer = $interval(function() {
-          $log.debug('Capturing image...');
           capture(count);
           count++;
         }, vm.config.delay, vm.config.shots);
       }
       /**
        *
-       * @param event
        */
-      function onWebcamOn(event) {
-        $log.debug('ngWebcamController.onWebcamOn(event) : ', event);
+      function onWebcamOn() {
         Webcam.attach('#ng-webcam-container');
       }
       /**
        *
-       * @param event
        */
-      function onWebcamOff(event) {
-        $log.debug('ngWebcamController.onWebcamOff(event) : ', event);
+      function onWebcamOff() {
         destroy();
       }
     }
-
     return directive;
-
   }
 })();

@@ -39,6 +39,7 @@ angular.module("app", ["ngWebcam"]);
     on-error="callbackError(err)"
     on-complete="callbackComplete(src)"
     on-load="callbackLoad()"
+    on-capturing=""callbackCapturing(src)"
     config="config">
 </ng-webcam>
 ```
