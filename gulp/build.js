@@ -8,7 +8,7 @@ var plugin = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-gulp.task('js', function() {
+gulp.task('dist', function() {
   return gulp.src(path.join(conf.paths.src, '/!(*.spec).js'))
     .pipe(plugin.useref())
     .pipe(plugin.sourcemaps.init())
@@ -21,8 +21,17 @@ gulp.task('js', function() {
     .pipe(plugin.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
 });
 
+gulp.task('src', function() {
+  return gulp.src(path.join(conf.paths.src, '/!(*.spec).js'))
+    .pipe(plugin.useref())
+    .pipe(plugin.bytediff.start())
+    .pipe(plugin.bytediff.stop())
+    .pipe(gulp.dest(conf.paths.dist))
+    .pipe(plugin.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
+});
+
 gulp.task('clean', function () {
   return plugin.del([path.join(conf.paths.dist, '/')]);
 });
 
-gulp.task('build', ['js']);
+gulp.task('build', ['src', 'dist']);
