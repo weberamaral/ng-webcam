@@ -29,7 +29,7 @@ ngWebcam uses WebcamJS to work properly so you need to add the script in your ma
 
 Simply add the module as dependency to your main application module likes this:
 ```javascript
-angular.module("app", ["ngWebcam]);
+angular.module("app", ["ngWebcam"]);
 ```
 
 ### The directive
