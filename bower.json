@@ -1,7 +1,7 @@
 {
   "name": "ng-webcam",
   "description": "AngularJS module for capturing images from your computer's camera.",
-  "main": "dist/ng-webcam.js",
+  "main": "dist/ng-webcam.min.js",
   "dependencies": {
     "angular": "1.4.*",
     "webcamjs": "^1.0.9"
