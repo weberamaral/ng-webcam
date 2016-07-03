@@ -1,6 +1,14 @@
 # ng-webcam
 
-ngWebcam is an AngularJS directive for capturing images from your computer's camera, and delivering then to you as data uri.
+ngWebcam is an AngularJS directive for capturing images from your computer's camera, and delivering then to you as JPEG 
+ or PNG [Data URIs](https://en.wikipedia.org/wiki/Data_URI_scheme). The images can then be displayed in your web page, render 
+ into a canvas or submited to your server. ngWebcam uses [WebcamJS](https://github.com/jhuckaby/webcamjs) to provide the 
+ core functionality.
+ 
+## Browser suport
+ 
+ngWebcam suports the same browsers supported by WebcamJS. 
+
 
 ## Live exemple
 
@@ -35,12 +43,13 @@ angular.module("app", ["ngWebcam"]);
 ### The directive
 
 ```html
-<ng-webcam
-    on-error="callbackError(err)"
-    on-complete="callbackComplete(src)"
-    on-load="callbackLoad()"
-    on-capturing=""callbackCapturing(src)"
-    config="config">
+<ng-webcam 
+    config="vm.config"
+    on-error="vm.onError(err)"
+    on-load="vm.onLoad()"
+    on-live="vm.onLive()"
+    on-capturing="vm.onCapturing(src, progress)"
+    on-complete="vm.onComplete(src, progress)">
 </ng-webcam>
 ```
 
@@ -48,10 +57,17 @@ angular.module("app", ["ngWebcam"]);
 
 ng-webcam comes with lots of options to simplify tour development:
 
-* `on-error` _function_ Callback function for error
-* `on-complete` _function_ Callback function for complete action
-* `on-load` _function_ Callback function for load action
-* `on-capturing` _function_ Callback function for each capturing image with progress
+* `on-error` _function_ Callback function for error. Fires when the WebcamJS library erro occurs 
+(your callback function is passed an error string)
+* `on-capture-complete` _function_ Callback function for capture complete action. Fires when the capture completes
+(your callback function is passed an array string (_data_uri) in `src` parameter and an number (_progress) in `progress` 
+parameter)
+* `on-load` _function_ Callback function for load action camera. Fires when the WebcamJS library finisheds loading
+* `on-live` _function_ Callback function for live action camera. Fires when the user's camera goes live - this will only
+happen after the user allows access to their camera
+* `on-capture-progress` _function_ Callback function for each capturing image with progress. Fires repeatedly while an capturing
+progress (your callback function is passed an string (_data_uri) in `src` parameter and an number (_progress) in `progress`
+parameter)
 * `config` _object_ Config options for init params in WebcamJS e directive | _optional
     - `viewerWidth` _number_ Width of live camera viewer in pixels| _default to actual size of the DOM element `auto`
     - `viewerHeight` _number_ Height of live camera viewer in pixels| _default to actual size of the DOM element `auto`
