@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('ng-webcam', []).directive('ngWebcam', ngWebcam);
-  ngWebcam.$inject = ['$log'];
+  ngWebcam.$inject = [];
   /**
    *  @ngdoc Directive
    *  @name ng-webcam
@@ -21,7 +21,7 @@
    *  </ng-webcam>
    *  ```
    */
-  function ngWebcam($log) {
+  function ngWebcam() {
     var directive = {
       restrict: 'E',
       template: template,
@@ -51,9 +51,9 @@
       });
     }
 
-    ngWebcamController.$inject = ['$scope', '$interval', '$log', '$window'];
+    ngWebcamController.$inject = ['$scope', '$interval', '$window'];
 
-    function ngWebcamController($scope, $interval, $log, $window) {
+    function ngWebcamController($scope, $interval, $window) {
       /*jshint validthis: true */
       var vm = this;
       var sound, timer;
@@ -186,8 +186,7 @@
         });
       }
 
-      function onWebcamCapture(event) {
-        $log.debug('ngWebcamController.onWebcamCapture(event) : ', event);
+      function onWebcamCapture() {
         var count = 0;
         timer = $interval(function() {
           capture(count);
@@ -195,13 +194,11 @@
         }, (vm.config.delay * 1000), vm.config.shots);
       }
 
-      function onWebcamOn(event) {
-        $log.debug('ngWebcamController.onWebcamOn(event) : ', event);
+      function onWebcamOn() {
         Webcam.attach('#ng-webcam-container');
       }
 
-      function onWebcamOff(event) {
-        $log.debug('ngWebcamController.onWebcamOff(event) : ', event);
+      function onWebcamOff() {
         destroy();
       }
 
