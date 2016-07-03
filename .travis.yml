@@ -1,16 +1,27 @@
 language: node_js
-sudo: false
 node_js:
-  - '0.10'
-  - '0.12'
-  - '4'
+  - '6'
 
-before_script:
+branches:
+  only:
+    - master
+
+before_install:
   - npm install -g bower
-  - npm install && bower install
+  - npm install -g gulp
 
 script:
-  - gulp build
+  - npm install
+  - bower install
+  - gulp clean
+  - gulp dist --verbose
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+cache:
+  directories:
+    - bower_components
+    - node_components
+
+notifications:
+  email:
+    - weberamaral@outlook.com
+
