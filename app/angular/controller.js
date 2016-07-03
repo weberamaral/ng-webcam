@@ -5,19 +5,41 @@
     /* jshint validthis: true */
     var vm = this;
     vm.config = {
-
+      delay: 2,
+      shots: 3,
+      flashFallbackUrl: 'bower_components/webcamjs/webcam.swf',
+      flashNotDetectedText: 'Seu browser não atende os requisitos mínimos para utilização da camera. ' +
+      'Instale o ADOBE Flash player ou utilize os browsers (Google Chrome, Firefox ou Edge)'
     };
-    vm.onComplete = function(src) {
-      $log.log('onComplete : ', src);
+
+    vm.showButtons = false;
+    vm.captureButtonEnable = false;
+
+    vm.onComplete = function(src, progress) {
+      var result = {
+        src: src,
+        progress: progress
+      };
+      $log.log('onComplete : ', result);
     };
     vm.onError = function(err) {
-      $log.error('onError : ', err);
+      $log.error('webcamController.onError : ', err);
+      vm.showButtons = false;
     };
     vm.onLoad = function() {
-      $log.info('onLoad');
+      $log.info('webcamController.onLoad');
+      vm.showButtons = true;
     };
-    vm.onCapturing = function(src) {
-      $log.info('onCapturing : ', src);
+    vm.onLive = function() {
+      $log.info('webcamController.onLive');
+      vm.captureButtonEnable = true;
+    };
+    vm.onCapturing = function(src, progress) {
+      var result = {
+        src: src,
+        progress: progress
+      }
+      $log.info('webcamController.onCapturing : ', result);
     };
     vm.capture = function() {
       $scope.$broadcast('ngWebcam_capture');
@@ -27,6 +49,7 @@
     };
     vm.off = function() {
       $scope.$broadcast('ngWebcam_off');
+      vm.captureButtonEnable = false;
     };
   }
 })();
