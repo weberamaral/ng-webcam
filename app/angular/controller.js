@@ -15,12 +15,8 @@
     vm.showButtons = false;
     vm.captureButtonEnable = false;
 
-    vm.onComplete = function(src, progress) {
-      var result = {
-        src: src,
-        progress: progress
-      };
-      $log.log('onComplete : ', result);
+    vm.onCaptureComplete = function(src) {
+      $log.log('webcamController.onCaptureComplete : ', src);
     };
     vm.onError = function(err) {
       $log.error('webcamController.onError : ', err);
@@ -34,16 +30,15 @@
       $log.info('webcamController.onLive');
       vm.captureButtonEnable = true;
     };
-    vm.onCapturing = function(src, progress) {
+    vm.onCaptureProgress = function(src, progress) {
       var result = {
         src: src,
         progress: progress
       }
-      $log.info('webcamController.onCapturing : ', result);
+      $log.info('webcamController.onCaptureProgress : ', result);
     };
     vm.capture = function() {
-      $scope.$broadcast('ngWebcam_capture');
-    };
+      $scope.$broadcast('ngWebcam_capture'); };
     vm.on = function() {
       $scope.$broadcast('ngWebcam_on');
     };

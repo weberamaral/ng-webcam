@@ -20,8 +20,8 @@
                on-error="vm.onError(err)"
                on-load="vm.onLoad()"
                on-live="vm.onLive()"
-               on-capturing="vm.onCapturing(src, progress)"
-               on-complete="vm.onComplete(src, progress)"></ng-webcam>
+               on-capture-progress="vm.onCaptureProgress(src, progress)"
+               on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
     <br><br>
     <div class="buttons" ng-if="vm.showButtons">
         <button type="button" ng-disabled="!vm.captureButtonEnable" ng-click="vm.capture()">Capturar</button>
