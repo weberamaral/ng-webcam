@@ -8,6 +8,7 @@
       delay: 2,
       shots: 3,
       flashFallbackUrl: 'bower_components/webcamjs/webcam.swf',
+      shutterUrl: 'shutter.mp3',
       flashNotDetectedText: 'Seu browser não atende os requisitos mínimos para utilização da camera. ' +
       'Instale o ADOBE Flash player ou utilize os browsers (Google Chrome, Firefox ou Edge)'
     };
