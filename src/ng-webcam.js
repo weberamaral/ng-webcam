@@ -11,12 +11,14 @@
    *
    *  @usage
    *  ```html
-   *  <ng-webcam config="vm.config"
-   *             on-error="vm.onError(err)"
-   *             on-load="vm.onLoad()"
-   *             on-live="vm.onLive()"
-   *             on-capturing="vm.onCapturing(src, progress)"
-   *             on-complete="vm.onComplete(src, progress)"></ng-webcam>
+   *  <ng-webcam
+   *    config="vm.config"
+   *    on-error="vm.onError(err)"
+   *    on-load="vm.onLoad()"
+   *    on-live="vm.onLive()"
+   *    on-capture-progress="vm.onCaptureProgress(src, progress)"
+   *    on-capture-complete="vm.onCaptureComplete(src)">
+   *  </ng-webcam>
    *  ```
    */
   function ngWebcam($log) {
@@ -29,10 +31,10 @@
       controllerAs: 'cam',
       scope: {
         config: '=',
-        onComplete: '&',
+        onCaptureComplete: '&',
         onError: '&',
         onLoad: '&',
-        onCapturing: '&',
+        onCaptureProgress: '&',
         onLive: '&'
       }
     };
@@ -174,18 +176,12 @@
         }
         Webcam.snap(function(data_uri) {
           images[index] = data_uri;
-          if(index < (vm.config.shots-1) && angular.isDefined(vm.onCapturing)) {
+          if(index < (vm.config.shots-1) && angular.isDefined(vm.onCaptureProgress)) {
             var progress = Math.round(((index+1) * 100) / vm.config.shots);
-            vm.onCapturing({
-              src: data_uri,
-              progress: progress
-            });
+            vm.onCaptureProgress({src: data_uri,progress: progress});
           }
-          if(index === (vm.config.shots-1) && angular.isDefined(vm.onComplete)) {
-            return vm.onComplete({
-              src: images,
-              progress: 100
-            });
+          if(index === (vm.config.shots-1) && angular.isDefined(vm.onCaptureComplete)) {
+            return vm.onCaptureComplete({src: images});
           }
         });
       }

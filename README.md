@@ -48,8 +48,8 @@ angular.module("app", ["ngWebcam"]);
     on-error="vm.onError(err)"
     on-load="vm.onLoad()"
     on-live="vm.onLive()"
-    on-capturing="vm.onCapturing(src, progress)"
-    on-complete="vm.onComplete(src, progress)">
+    on-capture-progress="vm.onCaptureProgress(src, progress)"
+    on-capture-complete="vm.onCaptureComplete(src)">
 </ng-webcam>
 ```
 
@@ -57,30 +57,41 @@ angular.module("app", ["ngWebcam"]);
 
 ng-webcam comes with lots of options to simplify tour development:
 
+#### Callbacks
+
 * `on-error` _function_ Callback function for error. Fires when the WebcamJS library erro occurs 
 (your callback function is passed an error string)
 * `on-capture-complete` _function_ Callback function for capture complete action. Fires when the capture completes
-(your callback function is passed an array string (_data_uri) in `src` parameter and an number (_progress) in `progress` 
-parameter)
+(your callback function is passed an array string (_data_uri_) in `src` parameter)
 * `on-load` _function_ Callback function for load action camera. Fires when the WebcamJS library finisheds loading
 * `on-live` _function_ Callback function for live action camera. Fires when the user's camera goes live - this will only
 happen after the user allows access to their camera
 * `on-capture-progress` _function_ Callback function for each capturing image with progress. Fires repeatedly while an capturing
-progress (your callback function is passed an string (_data_uri) in `src` parameter and an number (_progress) in `progress`
+progress (your callback function is passed an string (_data_uri_) in `src` parameter and an number (_progress_) in `progress`
 parameter)
-* `config` _object_ Config options for init params in WebcamJS e directive | _optional
-    - `viewerWidth` _number_ Width of live camera viewer in pixels| _default to actual size of the DOM element `auto`
-    - `viewerHeight` _number_ Height of live camera viewer in pixels| _default to actual size of the DOM element `auto`
-    - `outputWidth` _number_ Width of captured snapshot image in pixels | _default 320
-    - `outputHeight` _number_ Height of captured snapshot image in pixels | _default 240
-    - `delay` _number_ Number of seconds to wait and display before getting snapshot | _default 0
-    - `shots` _number_ Number of shots captured images | _default 1
-    - `shutterUrl` _string_ Shutter sound's url to play when taking snapshot | _optional
-    - `flahFallbackUrl` _string_ Url of the Adobe Flash player to enable the fallback and crossbrowser modes, _default based on `navigator.getUserMedia`
+
+#### Config
+
+* `config` _object_ Config options for init params in WebcamJS e directive | _optional_
+    - `viewerWidth` _number_ Width of live camera viewer in pixels| _default_ to actual size of the DOM element `auto`
+    - `viewerHeight` _number_ Height of live camera viewer in pixels| _default_ to actual size of the DOM element `auto`
+    - `outputWidth` _number_ Width of captured snapshot image in pixels | _default_ 320
+    - `outputHeight` _number_ Height of captured snapshot image in pixels | _default_ 240
+    - `delay` _number_ Number of seconds to wait and display before getting snapshot | _default_ 0
+    - `shots` _number_ Number of shots captured images | _default_ 1
+    - `shutterUrl` _string_ Shutter sound's url to play when taking snapshot | _optional_
+    - `flahFallbackUrl` _string_ Url of the Adobe Flash player to enable the fallback and crossbrowser modes, _default_ 
+    based on `navigator.getUserMedia`
+
+#### Dispatches events
+
+* `ngWebcam_capture` _event_ Notifies when it should be carried out to capture the camera
+* `ngWebcam_on` _event_ Notifies when the camera must be on
+* `ngWebcam_off` _event_ Notifies when the camera should be turned off
 
 ### Working example
 
-A working example is available in the `test` folder. Make sure to install bower and node dependencies:
+A working example is available in the `app` folder. Make sure to install bower and node dependencies:
 
 ```bash
 npm install && bower install
