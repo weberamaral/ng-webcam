@@ -1,5 +1,7 @@
 # ng-webcam
 
+[![Build Status](https://travis-ci.org/weberamaral/ng-webcam.svg?branch=master)](https://travis-ci.org/weberamaral/ng-webcam)
+
 ngWebcam is an AngularJS directive for capturing images from your computer's camera, and delivering then to you as JPEG 
  or PNG [Data URIs](https://en.wikipedia.org/wiki/Data_URI_scheme). The images can then be displayed in your web page, render 
  into a canvas or submited to your server. ngWebcam uses [WebcamJS](https://github.com/jhuckaby/webcamjs) to provide the 
