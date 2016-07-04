@@ -1,6 +1,7 @@
 # ng-webcam
 
 [![Dependency Status](https://david-dm.org/weberamaral/ng-webcam.svg)](https://david-dm.org/weberamaral/ng-webcam)
+[![devDependency Status](https://david-dm.org/weberamaral/ng-webcam/dev-status.svg)](https://david-dm.org/weberamaral/ng-webcam#info=devDependencies)
 
 [![Build Status](https://travis-ci.org/weberamaral/ng-webcam.svg?branch=master)](https://travis-ci.org/weberamaral/ng-webcam)
 [![covarage](https://codecov.io/gh/weberamaral/ng-webcam/branch/master/graph/badge.svg)](https://codecov.io/gh/weberamaral/ng-webcam)
