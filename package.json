@@ -6,7 +6,7 @@
     "init": "npm install",
     "install": "bower install",
     "build": "gulp clean && gulp build",
-    "patch-release": "npm version patch"
+    "patch-release": "node bin/patch-release.js"
   },
   "repository": {
     "type": "git",
