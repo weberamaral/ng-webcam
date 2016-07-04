@@ -7,6 +7,8 @@
     vm.config = {
       delay: 2,
       shots: 3,
+      viewerWidth: 480,
+      viewerHeight: 320,
       flashFallbackUrl: 'bower_components/webcamjs/webcam.swf',
       shutterUrl: 'shutter.mp3',
       flashNotDetectedText: 'Seu browser não atende os requisitos mínimos para utilização da camera. ' +
