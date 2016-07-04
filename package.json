@@ -6,7 +6,9 @@
     "init": "npm install",
     "install": "bower install",
     "build": "gulp clean && gulp build",
-    "patch-release": "node bin/patch-release.js"
+    "preversion" : "",
+    "version" : "npm run build && git add -A .",
+    "postversion" : "git push origin master && git push origin --tags"
   },
   "repository": {
     "type": "git",
