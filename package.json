@@ -1,14 +1,14 @@
 {
   "name": "ng-webcam",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "AngularJS module for capturing images from your computer's camera.",
   "scripts": {
     "init": "npm install",
     "install": "bower install",
     "build": "gulp clean && gulp build",
-    "preversion" : "",
-    "version" : "npm run build && git add -A .",
-    "postversion" : "git push origin master && git push origin --tags"
+    "preversion": "",
+    "version": "npm run build && git add -A .",
+    "postversion": "git push origin master && git push origin --tags"
   },
   "repository": {
     "type": "git",
