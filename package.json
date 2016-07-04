@@ -31,6 +31,7 @@
     "gulp-useref": "^3.1.0",
     "main-bower-files": "^2.13.1",
     "path": "^0.12.7",
+    "shelljs": "^0.7.0",
     "uglify-save-license": "^0.4.1"
   }
 }
