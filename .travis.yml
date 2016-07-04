@@ -1,0 +1,23 @@
+language: node_js
+node_js: stable
+
+branches:
+  only:
+    - master
+
+before_install:
+  - npm install bower -g
+  - npm install gulp -g
+
+script:
+  - npm install
+  - bower install
+
+cache:
+  directories:
+  - bower_components
+  - node_modules
+
+notifications:
+  email:
+    - weberamaral@outlook.com
