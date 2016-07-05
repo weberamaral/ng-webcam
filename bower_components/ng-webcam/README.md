@@ -6,7 +6,6 @@
 [![Build Status](https://travis-ci.org/weberamaral/ng-webcam.svg?branch=master)](https://travis-ci.org/weberamaral/ng-webcam)
 [![covarage](https://codecov.io/gh/weberamaral/ng-webcam/branch/master/graph/badge.svg)](https://codecov.io/gh/weberamaral/ng-webcam)
 
-
 ngWebcam is an AngularJS directive for capturing images from your computer's camera, and delivering then to you as JPEG 
  or PNG [Data URIs](https://en.wikipedia.org/wiki/Data_URI_scheme). The images can then be displayed in your web page, render 
  into a canvas or submited to your server. ngWebcam uses [WebcamJS](https://github.com/jhuckaby/webcamjs) to provide the 
@@ -89,6 +88,7 @@ parameter)
     - `shutterUrl` _string_ Shutter sound's url to play when taking snapshot | _optional_
     - `flahFallbackUrl` _string_ Url of the Adobe Flash player to enable the fallback and crossbrowser modes, _default_ 
     based on `navigator.getUserMedia`
+    - `countdown` _number_ Number of seconds to wait and display camera frame | _optional_
 
 #### Dispatches events
 
@@ -98,7 +98,8 @@ parameter)
 
 ### Working example
 
-A working example is available in the `app` folder. Make sure to install bower and node dependencies:
+A working example is available in `gh-pages` branch. Make sure to install bower and node dependencies, after checkout
+branch.
 
 ```bash
 npm install && bower install

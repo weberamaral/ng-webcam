@@ -33,12 +33,12 @@
     "codecov.yml",
     "gulpfile.js"
   ],
-  "version": "0.1.9",
-  "_release": "0.1.9",
+  "version": "0.1.13",
+  "_release": "0.1.13",
   "_resolution": {
     "type": "version",
-    "tag": "v0.1.9",
-    "commit": "4d841073013325de0e6c87dfa2191b152ed461a2"
+    "tag": "v0.1.13",
+    "commit": "79ec7fae4a68c78c78e76fb75676e038b825dc40"
   },
   "_source": "https://github.com/weberamaral/ng-webcam.git",
   "_target": "0.1.*",
