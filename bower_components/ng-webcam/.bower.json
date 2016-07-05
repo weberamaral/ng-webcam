@@ -1,0 +1,46 @@
+{
+  "name": "ng-webcam",
+  "description": "AngularJS module for capturing images from your computer's camera.",
+  "main": "dist/ng-webcam.js",
+  "dependencies": {
+    "angular": "1.4.*",
+    "webcamjs": "^1.0.9"
+  },
+  "authors": [
+    "Weber Amaral <weberamaral@outlook.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "camera",
+    "webcam",
+    "picture",
+    "snapshot",
+    "module",
+    "directive"
+  ],
+  "homepage": "https://github.com/weberamaral/ng-webcam",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "app",
+    "gulp",
+    "src",
+    "codecov.yml",
+    "gulpfile.js"
+  ],
+  "version": "0.1.9",
+  "_release": "0.1.9",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.9",
+    "commit": "4d841073013325de0e6c87dfa2191b152ed461a2"
+  },
+  "_source": "https://github.com/weberamaral/ng-webcam.git",
+  "_target": "0.1.*",
+  "_originalSource": "ng-webcam"
+}

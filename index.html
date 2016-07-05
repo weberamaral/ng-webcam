@@ -10,24 +10,32 @@
     <title>ng-webcam-sample</title>
     <meta name="description" content="">
 
+    <link rel="stylesheet" href="/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
 
 </head>
 <body ng-app="webcam">
 
-<main class="app" ng-controller="webcamController as vm">
-    <ng-webcam config="vm.config"
-               on-error="vm.onError(err)"
-               on-load="vm.onLoad()"
-               on-live="vm.onLive()"
-               on-capture-progress="vm.onCaptureProgress(src, progress)"
-               on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
-    <br><br>
-    <div class="buttons" ng-if="vm.showButtons">
-        <button type="button" ng-disabled="!vm.captureButtonEnable" ng-click="vm.capture()">Capturar</button>
-        <button type="button" ng-click="vm.off()">Desligar camera</button>
-        <button type="button" ng-click="vm.on()">Ligar camera</button>
+<main class="app container" ng-controller="webcamController as vm">
+    <div class="row">
+        <div class="col-md-12">
+            <ng-webcam config="vm.config"
+                       on-error="vm.onError(err)"
+                       on-load="vm.onLoad()"
+                       on-live="vm.onLive()"
+                       on-capture-progress="vm.onCaptureProgress(src, progress)"
+                       on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
+        </div>
+        <div class="col-md-12">
+            <p id="progress">Progress: {{vm.progress}}%</p>
+        </div>
+        <div class="col-md-12 buttons" ng-if="vm.showButtons">
+            <button class="btn btn-primary" type="button" ng-disabled="!vm.captureButtonEnable" ng-click="vm.capture()">Capturar</button>
+            <button class="btn btn-primary" type="button" ng-click="vm.off()">Desligar camera</button>
+            <button class="btn btn-primary" type="button" ng-click="vm.on()">Ligar camera</button>
+        </div>
     </div>
+    <div id="result" class="row"></div>
 </main>
 
 <script src="vendors/angular/angular.min.js"></script>

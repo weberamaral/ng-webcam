@@ -1,16 +1,31 @@
 body {
-    background-color: #444444;
-    font-size: 20px;
-    color: azure;
+    background-color: #BBB;
 }
 main {
-    margin: 20px auto;
-    max-width: 640px;
+    margin-top: 32px;
+}
+#ng-webcam-container {
+    margin: 0 auto;
+    border: 1px solid #999;
 }
 .buttons {
     text-align: center;
 }
-.ng-webcam {
-    margin: 0 auto;
+#webcam_movie_embed {
+    border: 1px solid #999;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+#result {
+    margin-top: 20px;
     text-align: center;
+}
+#result img {
+    margin-right: 12px;
+    margin-bottom: 12px;
+}
+#progress {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
 }
