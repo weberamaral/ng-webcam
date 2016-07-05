@@ -98,7 +98,8 @@ parameter)
 
 ### Working example
 
-A working example is available in the `app` folder. Make sure to install bower and node dependencies:
+A working example is available in `gh-pages` branch. Make sure to install bower and node dependencies, after checkout
+branch.
 
 ```bash
 npm install && bower install
