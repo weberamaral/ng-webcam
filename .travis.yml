@@ -11,5 +11,5 @@ before_install:
 
 script:
   - npm install -g
-  - bash ls
-  - bash ls node_modules/
+  - ls
+  - ls node_modules/
