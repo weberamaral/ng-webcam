@@ -11,16 +11,5 @@ before_install:
 
 script:
   - npm install -g
-  - gulp clean && gulp build
-
-cache:
-  directories:
-  - bower_components
-  - node_modules
-
-notifications:
-  email:
-    - weberamaral@outlook.com
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash ls
+  - bash ls node_modules/
