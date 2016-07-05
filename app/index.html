@@ -18,7 +18,7 @@
 
 <main class="app container" ng-controller="webcamController as vm">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="text-align: center">
             <ng-webcam config="vm.config"
                        on-error="vm.onError(err)"
                        on-load="vm.onLoad()"
@@ -40,7 +40,7 @@
 
 <script src="vendors/angular/angular.min.js"></script>
 <script src="vendors/webcamjs/webcam.min.js"></script>
-<script src="bower_components/ng-webcam/dist/ng-webcam.min.js"></script>
+<script src="bower_components/ng-webcam/dist/ng-webcam.js"></script>
 
 <script src="angular/app.js"></script>
 <script src="angular/controller.js"></script>

@@ -6,15 +6,9 @@ main {
 }
 #ng-webcam-container {
     margin: 0 auto;
-    border: 1px solid #999;
 }
 .buttons {
     text-align: center;
-}
-#webcam_movie_embed {
-    border: 1px solid #999;
-    margin-top: -1px;
-    margin-left: -1px;
 }
 #result {
     margin-top: 20px;
@@ -28,4 +22,40 @@ main {
     text-align: center;
     font-weight: bold;
     padding: 10px 0;
+}
+
+#ng-webcam-container {
+    position: relative;
+    display: inline-block;
+}
+
+#ng-webcam-container:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,.8);
+}
+
+.ng-webcam {
+    position: relative;
+    display: inline-block;
+}
+
+.ng-webcam #counter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -4px;
+    margin-left: -8px;
+    color: white;
+    z-index: 2;
+}
+
+.ng-webcam.no-overlay #ng-webcam-container:after,
+.ng-webcam.no-overlay #counter{
+    display: none;
 }
