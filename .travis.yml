@@ -12,6 +12,4 @@ before_install:
 script:
   - npm prune
   - npm install
-  - npm install wrench
-  - ls node_modules/
   - gulp clean
