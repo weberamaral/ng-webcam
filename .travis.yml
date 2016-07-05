@@ -22,6 +22,3 @@ cache:
 notifications:
   email:
     - weberamaral@outlook.com
-
-after_success:
-  - npm version patch

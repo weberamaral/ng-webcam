@@ -19,7 +19,7 @@ ngWebcam suports the same browsers supported by WebcamJS.
 
 ## Live exemple
 
-To see live exemple, go to the [sample page](http://www.google.com)
+To see live exemple, go to the [sample page](https://weberamaral.github.io/ng-webcam/)
 
 ## Instalation
 
