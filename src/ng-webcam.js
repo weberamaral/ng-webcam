@@ -39,9 +39,11 @@
       }
     };
 
-    function template() {
-      return ['<div class="ng-webcam">',
-        '<div id="ng-webcam-container"></div>'].join('');
+    function template(element, attrs) {
+      return ['<div ng-show="cam.webcamLive === true" class="ng-webcam" ng-class="{\'no-overlay\' : cam.counter === 0 || cam.config.countdown === 0}">',
+        '<span ng-show="cam.config.countdown >= 0" id="counter">{{cam.counter}}</span>',
+        '<div id="ng-webcam-container" class="ng-webcam-continer"></div>',
+        '</div>'].join('');
     }
 
     function link(scope, element, attrs, ctrl) {
@@ -56,11 +58,12 @@
     function ngWebcamController($scope, $interval, $window) {
       /*jshint validthis: true */
       var vm = this;
-      var sound, timer;
+      var sound, snapshotTimer, countdownTimer;
       var images = [];
       vm.webcamLoaded = false;
       vm.webcamLive = false;
       vm.progress = '0%';
+      vm.counter = 3;
       vm.init = init;
       vm.destroy = destroy;
       /**
@@ -105,6 +108,7 @@
         if(angular.isUndefined(vm.config.outputHeight)) vm.config.outputHeight = 240;
         if(angular.isUndefined(vm.config.delay)) vm.config.delay = 0;
         if(angular.isUndefined(vm.config.shots)) vm.config.shots = 1;
+        if(angular.isUndefined(vm.config.countdown)) vm.config.countdown = 0;
         configureListeners();
         configure();
       }
@@ -172,7 +176,7 @@
           sound.play();
         }
         if(index === (vm.config.shots-1)) {
-          $interval.cancel(timer);
+          $interval.cancel(snapshotTimer);
         }
         Webcam.snap(function(data_uri) {
           images[index] = data_uri;
@@ -187,11 +191,28 @@
       }
 
       function onWebcamCapture() {
-        var count = 0;
-        timer = $interval(function() {
-          capture(count);
-          count++;
-        }, (vm.config.delay * 1000), vm.config.shots);
+        vm.counter = 3;
+        if(angular.isUndefined(vm.config.countdown)) {
+          var count = 0;
+          snapshotTimer = $interval(function() {
+            capture(count);
+            count++;
+          }, (vm.config.delay * 1000), vm.config.shots);
+        } else {
+          countdownTimer = $interval(function() {
+            --vm.counter;
+            if(vm.counter === 0) {
+              if(countdownTimer) {
+                $interval.cancel(countdownTimer);
+              }
+              var count = 0;
+              snapshotTimer = $interval(function() {
+                capture(count);
+                count++;
+              }, (vm.config.delay * 1000), vm.config.shots);
+            }
+          }, 1000, vm.config.countdown);
+        }
       }
 
       function onWebcamOn() {
@@ -210,7 +231,7 @@
       function browsers() {
         /*jshint maxcomplexity: 40 */
         var ua= $window.navigator.userAgent, tem,
-            M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+          M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
         if(/trident/i.test(M[1])){
           tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
           return 'IE '+(tem[1] || '');

@@ -89,6 +89,7 @@ parameter)
     - `shutterUrl` _string_ Shutter sound's url to play when taking snapshot | _optional_
     - `flahFallbackUrl` _string_ Url of the Adobe Flash player to enable the fallback and crossbrowser modes, _default_ 
     based on `navigator.getUserMedia`
+    - `countdown` _number_ Number of seconds to wait and display camera frame | _optional_
 
 #### Dispatches events
 

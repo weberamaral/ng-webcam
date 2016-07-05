@@ -12,5 +12,3 @@ Thumbs.db
 npm-debug.log
 
 ## app
-app/bower_components
-app/node_modules
