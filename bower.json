@@ -29,6 +29,8 @@
     "tests",
     "app",
     "gulp",
-    "src"
+    "src",
+    "codecov.yml",
+    "gulpfile.js"
   ]
 }
