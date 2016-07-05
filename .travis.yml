@@ -24,4 +24,4 @@ notifications:
     - weberamaral@outlook.com
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - npm version patch
