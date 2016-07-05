@@ -1,5 +1,5 @@
 language: node_js
-node_js: '6.2.1'
+node_js: stable
 
 branches:
   only:
@@ -10,6 +10,18 @@ before_install:
   - npm install gulp -g
 
 script:
-  - npm prune
   - npm install
-  - gulp clean
+  - bower install
+  - gulp clean && gulp build
+
+cache:
+  directories:
+  - bower_components
+  - node_modules
+
+notifications:
+  email:
+    - weberamaral@outlook.com
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
