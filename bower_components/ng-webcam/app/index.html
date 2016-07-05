@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no,
+    width=device-width, height=device-height,
+    initial-scale=1, maximum-scale=1, minimum-scale=1">
+
+    <title>ng-webcam-sample</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body ng-app="webcam">
+
+<main class="app" ng-controller="webcamController as vm">
+    <ng-webcam config="vm.config"
+               on-error="vm.onError(err)"
+               on-load="vm.onLoad()"
+               on-live="vm.onLive()"
+               on-capture-progress="vm.onCaptureProgress(src, progress)"
+               on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
+    <br><br>
+    <div class="buttons" ng-if="vm.showButtons">
+        <button type="button" ng-disabled="!vm.captureButtonEnable" ng-click="vm.capture()">Capturar</button>
+        <button type="button" ng-click="vm.off()">Desligar camera</button>
+        <button type="button" ng-click="vm.on()">Ligar camera</button>
+    </div>
+</main>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/webcamjs/webcam.min.js"></script>
+<script src="bower_components/ng-webcam/dist/ng-webcam.min.js"></script>
+
+<script src="angular/app.js"></script>
+<script src="angular/controller.js"></script>
+
+</body>
+</html>
