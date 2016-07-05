@@ -1,7 +1,6 @@
 {
   "name": "ng-webcam-sample",
   "dependencies": {
-    "angular": "1.4.8",
-    "webcamjs": "*"
+    "ng-webcam" : "1.0.4"
   }
 }
