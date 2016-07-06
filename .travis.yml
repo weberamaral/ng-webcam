@@ -3,7 +3,7 @@ node_js: stable
 
 branches:
   only:
-    - master
+    - development
 
 before_install:
   - npm install bower -g
