@@ -53,16 +53,15 @@
       });
     }
 
-    ngWebcamController.$inject = ['$scope', '$interval', '$window'];
+    ngWebcamController.$inject = ['$scope', '$interval'];
 
-    function ngWebcamController($scope, $interval, $window) {
+    function ngWebcamController($scope, $interval) {
       /*jshint validthis: true */
       var vm = this;
       var sound, snapshotTimer, countdownTimer;
       var images = [];
       vm.webcamLoaded = false;
       vm.webcamLive = false;
-      vm.progress = '0%';
       vm.counter = 3;
       vm.init = init;
       vm.destroy = destroy;
@@ -114,9 +113,19 @@
       }
 
       function destroy() {
-        Webcam.reset();
+        if(vm.webcamLive) Webcam.reset();
         vm.webcamLive = false;
         vm.webcamLoaded = false;
+        if(angular.isDefined(snapshotTimer)) {
+          $interval.cancel(snapshotTimer);
+          snapshotTimer = undefined;
+        }
+        if(angular.isDefined(countdownTimer)) {
+          $interval.cancel(countdownTimer);
+          countdownTimer = undefined;
+        }
+        vm.counter = 3;
+
       }
 
       function configure() {
@@ -136,7 +145,8 @@
           dest_height: vm.config.outputHeight,
           force_flash: false,
           image_format: 'jpeg',
-          jpeg_quality: 100
+          jpeg_quality: 100,
+          flip_horiz: true
         });
         if(angular.isDefined(vm.config.flashFallbackUrl)) {
           Webcam.setSWFLocation(vm.config.flashFallbackUrl);
@@ -191,7 +201,6 @@
       }
 
       function onWebcamCapture() {
-        vm.counter = 3;
         if(angular.isUndefined(vm.config.countdown)) {
           var count = 0;
           snapshotTimer = $interval(function() {
@@ -199,8 +208,10 @@
             count++;
           }, (vm.config.delay * 1000), vm.config.shots);
         } else {
+          if(countdownTimer !== undefined) return;
+          vm.counter = 3;
           countdownTimer = $interval(function() {
-            --vm.counter;
+            vm.counter = vm.counter - 1;
             if(vm.counter === 0) {
               if(countdownTimer) {
                 $interval.cancel(countdownTimer);
@@ -211,7 +222,7 @@
                 count++;
               }, (vm.config.delay * 1000), vm.config.shots);
             }
-          }, 1000, vm.config.countdown);
+          }, 1000, 3);
         }
       }
 
@@ -221,28 +232,6 @@
 
       function onWebcamOff() {
         destroy();
-      }
-
-      function hasUserMedia() {
-        return ($window.navigator.getUserMedia || $window.navigator.webkitGetUserMedia ||
-        $window.navigator.mozGetUserMedia || $window.navigator.msGetUserMedia);
-      }
-
-      function browsers() {
-        /*jshint maxcomplexity: 40 */
-        var ua= $window.navigator.userAgent, tem,
-          M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-        if(/trident/i.test(M[1])){
-          tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
-          return 'IE '+(tem[1] || '');
-        }
-        if(M[1]=== 'Chrome'){
-          tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
-          if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-        }
-        M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-        if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-        return M.join(' ');
       }
     }
     return directive;
