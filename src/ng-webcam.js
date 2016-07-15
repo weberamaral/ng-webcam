@@ -41,7 +41,7 @@
 
     function template(element, attrs) {
       return ['<div ng-show="vm.webcamLive === true" class="ng-webcam" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
-        '<span ng-show="vm.config.countdown >= 0" id="ng-webcam-counter">{{vm.counter}}</span>',
+        '<span ng-show="vm.config.countdown > 0 && vm.counter > 0" id="ng-webcam-counter">{{vm.counter}}</span>',
         '<img id="ng-webcam-overlay" src="{{vm.config.overlay}}" />',
         '<div id="ng-webcam-container"></div>',
         '</div>'].join('');
