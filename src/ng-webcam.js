@@ -28,7 +28,7 @@
       link: link,
       bindToController: true,
       controller: ngWebcamController,
-      controllerAs: 'cam',
+      controllerAs: 'vm',
       scope: {
         config: '=',
         onCaptureComplete: '&',
@@ -40,9 +40,10 @@
     };
 
     function template(element, attrs) {
-      return ['<div ng-show="cam.webcamLive === true" class="ng-webcam" ng-class="{\'no-overlay\' : cam.counter === 0 || cam.config.countdown === 0}">',
-        '<span ng-show="cam.config.countdown >= 0" id="counter">{{cam.counter}}</span>',
-        '<div id="ng-webcam-container" class="ng-webcam-continer"></div>',
+      return ['<div ng-show="vm.webcamLive === true" class="ng-webcam" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
+        '<span ng-show="vm.config.countdown >= 0" id="ng-webcam-counter">{{vm.counter}}</span>',
+        '<img id="ng-webcam-overlay" src="{{vm.config.overlay}}" />',
+        '<div id="ng-webcam-container"></div>',
         '</div>'].join('');
     }
 
@@ -175,8 +176,9 @@
           });
         });
         Webcam.on('error', function(err) {
+          console.log('error.webcamjs = ', err);
           if(angular.isDefined(vm.onError)) {
-            return vm.onError({err:err});
+            vm.onError({err:err});
           }
         });
       }
