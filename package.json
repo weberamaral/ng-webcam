@@ -1,6 +1,6 @@
 {
   "name": "ng-webcam",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "AngularJS module for capturing images from your computer's camera.",
   "scripts": {
     "init": "npm install",

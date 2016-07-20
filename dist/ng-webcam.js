@@ -40,9 +40,9 @@
     };
 
     function template(element, attrs) {
-      return ['<div ng-show="vm.webcamLive === true" class="ng-webcam" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
-        '<span ng-show="vm.config.countdown > 0 && vm.counter > 0" id="ng-webcam-counter">{{vm.counter}}</span>',
-        '<img id="ng-webcam-overlay" src="{{vm.config.overlay}}" />',
+      return ['<div class="ng-webcam no-overlay" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
+        '<span ng-show="vm.webcamLive === true && vm.config.countdown > 0 && vm.counter > 0" id="ng-webcam-counter">{{vm.counter}}</span>',
+        '<img ng-show="vm.webcamLive === true" id="ng-webcam-overlay" src="{{vm.config.overlay}}" />',
         '<div id="ng-webcam-container"></div>',
         '</div>'].join('');
     }
@@ -102,6 +102,7 @@
 
       function init() {
         vm.config = vm.config || {};
+        if(window.localStorage) window.localStorage.setItem('visited', '1');
         if(angular.isUndefined(vm.config.viewerWidth)) vm.config.viewerWidth = 'auto';
         if(angular.isUndefined(vm.config.viewerHeight)) vm.config.viewerHeight = 'auto';
         if(angular.isUndefined(vm.config.outputWidth)) vm.config.outputWidth = 320;
@@ -149,11 +150,11 @@
           jpeg_quality: 100,
           flip_horiz: true
         });
-        if(angular.isDefined(vm.config.flashFallbackUrl)) {
-          Webcam.setSWFLocation(vm.config.flashFallbackUrl);
-        }
         if(angular.isDefined(vm.config.flashNotDetectedText)) {
           Webcam.set('flashNotDetectedText', vm.config.flashNotDetectedText);
+        }
+        if(angular.isDefined(vm.config.flashFallbackUrl)) {
+          Webcam.setSWFLocation(vm.config.flashFallbackUrl);
         }
         Webcam.attach('#ng-webcam-container');
       }
@@ -176,7 +177,6 @@
           });
         });
         Webcam.on('error', function(err) {
-          console.log('error.webcamjs = ', err);
           if(angular.isDefined(vm.onError)) {
             vm.onError({err:err});
           }
