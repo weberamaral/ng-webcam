@@ -5,8 +5,9 @@
     /* jshint validthis: true */
     var vm = this;
     vm.config = {
-      delay: 2,
+      delay: 1,
       shots: 3,
+      countdown : 3,
       flashFallbackUrl: 'vendors/webcamjs/webcam.swf',
       shutterUrl: 'shutter.mp3',
       flashNotDetectedText: 'Seu browser não atende os requisitos mínimos para utilização da camera. ' +

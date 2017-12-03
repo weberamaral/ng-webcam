@@ -40,9 +40,9 @@
     };
 
     function template(element, attrs) {
-      return ['<div class="ng-webcam no-overlay" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
-        '<span ng-show="vm.webcamLive === true && vm.config.countdown > 0 && vm.counter > 0" id="ng-webcam-counter">{{vm.counter}}</span>',
-        '<img ng-show="vm.webcamLive === true" id="ng-webcam-overlay" src="{{vm.config.overlay}}" />',
+      return ['<div class="ng-webcam" ng-class="{\'no-overlay\' : vm.counter === 0 || vm.config.countdown === 0}">',
+        '<span ng-show="vm.webcamLive === true && vm.config.countdown > 0 && vm.counter > 0" id="counter">{{vm.counter}}</span>',
+        '<img ng-show="vm.webcamLive === true" id="ng-webcam-overlay" ng-src="{{vm.config.overlay}}" />',
         '<div id="ng-webcam-container"></div>',
         '</div>'].join('');
     }
@@ -63,7 +63,7 @@
       var images = [];
       vm.webcamLoaded = false;
       vm.webcamLive = false;
-      vm.counter = 3;
+      vm.counter = 0;
       vm.init = init;
       vm.destroy = destroy;
       /**
@@ -103,13 +103,13 @@
       function init() {
         vm.config = vm.config || {};
         if(window.localStorage) window.localStorage.setItem('visited', '1');
-        if(angular.isUndefined(vm.config.viewerWidth)) vm.config.viewerWidth = 'auto';
-        if(angular.isUndefined(vm.config.viewerHeight)) vm.config.viewerHeight = 'auto';
+        if(angular.isUndefined(vm.config.viewerWidth)) vm.config.viewerWidth = 320;
+        if(angular.isUndefined(vm.config.viewerHeight)) vm.config.viewerHeight = 240;
         if(angular.isUndefined(vm.config.outputWidth)) vm.config.outputWidth = 320;
         if(angular.isUndefined(vm.config.outputHeight)) vm.config.outputHeight = 240;
         if(angular.isUndefined(vm.config.delay)) vm.config.delay = 0;
         if(angular.isUndefined(vm.config.shots)) vm.config.shots = 1;
-        if(angular.isUndefined(vm.config.countdown)) vm.config.countdown = 0;
+	    if(angular.isUndefined(vm.config.countdown)){ vm.config.countdown = 0; } else {vm.counter = vm.config.countdown; }
         configureListeners();
         configure();
       }
@@ -126,7 +126,7 @@
           $interval.cancel(countdownTimer);
           countdownTimer = undefined;
         }
-        vm.counter = 3;
+        vm.counter = 0;
 
       }
 
@@ -203,7 +203,7 @@
       }
 
       function onWebcamCapture() {
-        if(angular.isUndefined(vm.config.countdown)) {
+        if(!vm.config.countdown) {
           var count = 0;
           snapshotTimer = $interval(function() {
             capture(count);
@@ -211,20 +211,23 @@
           }, (vm.config.delay * 1000), vm.config.shots);
         } else {
           if(countdownTimer !== undefined) return;
-          vm.counter = 3;
+          vm.counter = vm.config.countdown;
           countdownTimer = $interval(function() {
             vm.counter = vm.counter - 1;
             if(vm.counter === 0) {
               if(countdownTimer) {
                 $interval.cancel(countdownTimer);
               }
-              var count = 0;
+              
+              //snap first
+	          capture(0);
+              var count = 1;
               snapshotTimer = $interval(function() {
-                capture(count);
-                count++;
-              }, (vm.config.delay * 1000), vm.config.shots);
+	              capture(count);
+                  count++;
+              }, (vm.config.delay * 1000), vm.config.shots - 1);
             }
-          }, 1000, 3);
+          }, 1000, vm.config.countdown);
         }
       }
 
