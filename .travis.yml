@@ -4,6 +4,7 @@ node_js: stable
 branches:
   only:
     - master
+    - /^greenkeeper/.*$/
 
 before_install:
   - npm install bower -g
