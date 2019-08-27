@@ -4,7 +4,7 @@
 [![devDependency Status](https://david-dm.org/weberamaral/ng-webcam/dev-status.svg)](https://david-dm.org/weberamaral/ng-webcam#info=devDependencies)
 
 [![Build Status](https://travis-ci.org/weberamaral/ng-webcam.svg?branch=master)](https://travis-ci.org/weberamaral/ng-webcam)
-[![covarage](https://codecov.io/gh/weberamaral/ng-webcam/branch/master/graph/badge.svg)](https://codecov.io/gh/weberamaral/ng-webcam)
+[![covarage](https://codecov.io/gh/weberamaral/ng-webcam/branch/master/graph/badge.svg)](https://codecov.io/gh/weberamaral/ng-webcam) [![Greenkeeper badge](https://badges.greenkeeper.io/weberamaral/ng-webcam.svg)](https://greenkeeper.io/)
 
 ngWebcam is an AngularJS directive for capturing images from your computer's camera, and delivering then to you as JPEG 
  or PNG [Data URIs](https://en.wikipedia.org/wiki/Data_URI_scheme). The images can then be displayed in your web page, render 
